@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { Button, Input } from '@/shared/ui'
-import { onMounted, ref, computed } from 'vue'
-
-const login = ref('')
-const password = ref('')
-
-const isButtonDisabled = computed(() => password.value.length < 8)
+import { Authentication } from '@/features/auth'
+import { onMounted } from 'vue'
 
 onMounted(() => {
   document.body.classList.value = 'dark'
@@ -25,13 +20,7 @@ onMounted(() => {
       <div class="header">
         <h1 class="title"><span class="accentText">Budget</span> Tracker</h1>
       </div>
-      <Input label="Логин" :value="login" @change="(value) => (login = value)" />
-      <Input label="Пароль" type="password" :value="password" @input="(value) => (password = value)" />
-      <div class="buttons">
-        <Button :disabled="isButtonDisabled" theme="outlined">Войти</Button>
-        <Button>Нет аккаунта? <span class="accentText">Зарегистрироваться</span></Button>
-        <Button><span class="accentText">Попробовать</span> без регистрации</Button>
-      </div>
+      <Authentication trial />
     </div>
   </div>
 </template>
@@ -85,13 +74,6 @@ onMounted(() => {
       font-size: 3rem;
       font-weight: var(--font-bold);
     }
-  }
-
-  .buttons {
-    width: 100%;
-    max-width: 324px;
-    display: flex;
-    flex-direction: column;
   }
 }
 .accentText {
