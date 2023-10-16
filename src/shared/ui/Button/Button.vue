@@ -15,7 +15,6 @@ defineEmits(['click'])
     :class="[theme, size, { disabled }]"
     :disabled="disabled"
     @click="method"
-    v-bind="$attrs"
   >
     <Spinner v-if="loading" />
     <component :is="leftIcon" class="icon" :class="[loading && 'invisible']" />

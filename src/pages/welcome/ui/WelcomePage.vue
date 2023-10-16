@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import { Button, ThemeSwitcher } from '@/shared/ui'
+import { Button, Input } from '@/shared/ui'
+import { onMounted, ref, computed } from 'vue'
+
+const login = ref('')
+const password = ref('')
+
+const isButtonDisabled = computed(() => password.value.length < 8)
+
+onMounted(() => {
+  document.body.classList.value = 'dark'
+})
 </script>
 
 <template>
   <div class="container">
-    <ThemeSwitcher />
     <picture class="picture">
       <img class="image" src="/welcome-page.png" />
       <div class="pictureText">
@@ -16,10 +25,10 @@ import { Button, ThemeSwitcher } from '@/shared/ui'
       <div class="header">
         <h1 class="title"><span class="accentText">Budget</span> Tracker</h1>
       </div>
-      <input placeholder="asdasd" />
-      <input placeholder="asdasd" />
+      <Input label="Логин" :value="login" @change="(value) => (login = value)" />
+      <Input label="Пароль" type="password" :value="password" @input="(value) => (password = value)" />
       <div class="buttons">
-        <Button disabled theme="outlined">Войти</Button>
+        <Button :disabled="isButtonDisabled" theme="outlined">Войти</Button>
         <Button>Нет аккаунта? <span class="accentText">Зарегистрироваться</span></Button>
         <Button><span class="accentText">Попробовать</span> без регистрации</Button>
       </div>
@@ -72,6 +81,7 @@ import { Button, ThemeSwitcher } from '@/shared/ui'
     justify-content: center;
     align-items: center;
     .title {
+      text-align: center;
       font-size: 3rem;
       font-weight: var(--font-bold);
     }
