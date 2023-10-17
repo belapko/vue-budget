@@ -1,4 +1,4 @@
-import type { Component } from "vue"
+import type { Component } from 'vue'
 
 type ButtonTheme = 'clear' | 'outlined'
 
@@ -11,5 +11,6 @@ export interface Props {
   rightIcon?: Component
   loading?: boolean
   disabled?: boolean
-  method?: (payload: MouseEvent) => void
+  clickEnter?: boolean
+  method?: (payload: MouseEvent | KeyboardEvent) => void
 }

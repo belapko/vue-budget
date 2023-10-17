@@ -4,11 +4,11 @@
 const jsonServer = require('json-server')
 const auth = require('json-server-auth')
 const path = require('path')
-const app = jsonServer.create()
 
+const app = jsonServer.create()
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'))
 
-app.use(jsonServer.defaults({}))
+app.use(jsonServer.defaults())
 app.use(jsonServer.bodyParser)
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи

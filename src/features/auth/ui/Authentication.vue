@@ -1,23 +1,36 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Input, Button } from '@/shared/ui'
+import { Input, Button, Text } from '@/shared/ui'
+import { useAuthStore } from '../model'
 
+const store = useAuthStore()
 defineProps<{ trial?: boolean }>()
 
 const emailRe =
   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
-const login = ref<string>('')
+const email = ref<string>('')
 const password = ref<string>('')
-const isButtonDisabled = computed<boolean>(() => !emailRe.test(login.value) || !(password.value.length >= 8))
-
+const isButtonDisabled = computed<boolean>(() => !emailRe.test(email.value) || !(password.value.length >= 8))
 const isRegister = ref<boolean>(false)
+
+const handleAuth = () => {
+  store.auth(email.value, password.value, isRegister.value ? 'register' : 'login')
+}
 </script>
 
 <template>
   <div :class="$style.authCard">
-    <Input label="Email" :value="login" @input="(value) => (login = value)" />
-    <Input label="Пароль" type="password" :value="password" @input="(value) => (password = value)" />
-    <Button :disabled="isButtonDisabled" theme="outlined">{{ isRegister ? 'Зарегистрироваться' : 'Войти' }}</Button>
+    <Text v-if="store.error" is-error :paragraphs="[store.error]" />
+    <Input label="Email" :value="email" @input="(value) => (email = value)" />
+    <Input label="Пароль" type="password" :value="password" @input="(value) => (password = value)" @keypress.enter="handleAuth" />
+    <Button
+      :loading="store.isLoading"
+      :disabled="isButtonDisabled"
+      theme="outlined"
+      click-enter
+      :method="handleAuth"
+      >{{ isRegister ? 'Зарегистрироваться' : 'Войти' }}</Button
+    >
     <div :class="$style.buttons">
       <Button :method="() => (isRegister = !isRegister)">
         <span v-if="isRegister">Есть аккаунт? <span :class="$style.accentText">Войти</span></span>
@@ -43,5 +56,8 @@ const isRegister = ref<boolean>(false)
 .buttons {
   display: flex;
   flex-direction: column;
+}
+
+.error {
 }
 </style>

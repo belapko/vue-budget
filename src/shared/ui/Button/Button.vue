@@ -6,7 +6,7 @@ withDefaults(defineProps<Props>(), {
   theme: 'clear',
   size: 'medium'
 })
-defineEmits(['click'])
+// defineEmits(['click'])
 </script>
 
 <template>

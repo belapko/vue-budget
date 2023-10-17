@@ -1,6 +1,9 @@
 {
-  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" },
-  "users": [{ "id": 1, "username": "admin", "password": "admin" }]
+  "users": [
+    {
+      "email": "belapko23@gmail.com",
+      "password": "$2a$10$Z48UsVwKvXlVRquRZ28M7elc8NTFDPr9rH7HhlkZ6gKMkFx9JQxJ2",
+      "id": 1
+    }
+  ]
 }
