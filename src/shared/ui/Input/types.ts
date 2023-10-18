@@ -5,4 +5,5 @@ export interface Props {
   theme?: InputTheme
   label?: string
   value?: string
+  autofocus?: boolean
 }

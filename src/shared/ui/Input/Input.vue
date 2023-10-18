@@ -30,7 +30,7 @@ const onChange = (event: Event) => {
       @change="onChange"
       v-bind="$attrs"
       placeholder=" "
-      :autofocus="true"
+      :autofocus="autofocus"
     />
     <label :class="[$style.label]" v-if="theme === 'underlined'">{{ label }}</label>
   </div>

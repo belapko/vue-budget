@@ -21,7 +21,7 @@ const handleAuth = () => {
 <template>
   <div :class="$style.authCard">
     <Text v-if="store.error" is-error :paragraphs="[store.error]" />
-    <Input label="Email" :value="email" @input="(value) => (email = value)" />
+    <Input label="Email" :value="email" @input="(value) => (email = value)" autofocus/>
     <Input label="Пароль" type="password" :value="password" @input="(value) => (password = value)" @keypress.enter="handleAuth" />
     <Button
       :loading="store.isLoading"
