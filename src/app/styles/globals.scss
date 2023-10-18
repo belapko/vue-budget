@@ -1,17 +1,22 @@
 :root {
   --font: 'Poppins';
+  @media screen and (min-width: 961px) {
+    --font-small: 16px;
+    --font-medium: 18px;
+    --font-large: 20px;
+  }
 
-  --font-mobile-small: 12px;
-  --font-mobile-medium: 14px;
-  --font-mobile-large: 16px;
+  @media screen and (max-width: 960px) {
+    --font-small: 15px;
+    --font-medium: 17px;
+    --font-large: 19px;
+  }
 
-  --font-tablet-small: 15px;
-  --font-tablet-medium: 17px;
-  --font-tablet-large: 19px;
-
-  --font-small: 16px;
-  --font-medium: 18px;
-  --font-large: 20px;
+  @media screen and (max-width: 480px) {
+    --font-small: 12px;
+    --font-medium: 14px;
+    --font-large: 16px;
+  }
 
   --font-light: 300;
   --font-regular: 400;
