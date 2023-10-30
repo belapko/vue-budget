@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { Input, Button, Text } from '@/shared/ui'
 import { useAuthStore } from '../model'
 
@@ -13,24 +13,27 @@ const password = ref<string>('')
 const isButtonDisabled = computed<boolean>(() => !emailRe.test(email.value) || !(password.value.length >= 8))
 const isRegister = ref<boolean>(false)
 
+watch(isRegister, () => (store.error = ''))
+
 const handleAuth = () => {
-  store.auth(email.value, password.value, isRegister.value ? 'register' : 'login')
+  store.auth(email.value, password.value, isRegister.value ? 'signup' : 'signin')
 }
 </script>
 
 <template>
   <div :class="$style.authCard">
     <Text v-if="store.error" is-error :paragraphs="[store.error]" />
-    <Input label="Email" :value="email" @input="(value) => (email = value)" autofocus/>
-    <Input label="Пароль" type="password" :value="password" @input="(value) => (password = value)" @keypress.enter="handleAuth" />
-    <Button
-      :loading="store.isLoading"
-      :disabled="isButtonDisabled"
-      theme="outlined"
-      click-enter
-      :method="handleAuth"
-      >{{ isRegister ? 'Зарегистрироваться' : 'Войти' }}</Button
-    >
+    <Input label="Email" :value="email" @input="(value) => (email = value)" autofocus />
+    <Input
+      label="Пароль"
+      type="password"
+      :value="password"
+      @input="(value) => (password = value)"
+      @keypress.enter="handleAuth"
+    />
+    <Button :loading="store.isLoading" :disabled="isButtonDisabled" theme="outlined" click-enter :method="handleAuth">{{
+      isRegister ? 'Зарегистрироваться' : 'Войти'
+    }}</Button>
     <div :class="$style.buttons">
       <Button :method="() => (isRegister = !isRegister)">
         <span v-if="isRegister">Есть аккаунт? <span :class="$style.accentText">Войти</span></span>

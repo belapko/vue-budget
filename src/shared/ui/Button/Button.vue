@@ -12,7 +12,7 @@ withDefaults(defineProps<Props>(), {
 <template>
   <button
     class="button"
-    :class="[theme, size, { disabled }]"
+    :class="[theme, size, { disabled, loading }]"
     :disabled="disabled"
     @click="method"
   >
@@ -24,6 +24,9 @@ withDefaults(defineProps<Props>(), {
 </template>
 
 <style scoped lang="scss">
+.loading {
+  pointer-events: none;
+}
 .small {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;

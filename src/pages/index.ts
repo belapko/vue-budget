@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/auth',
-    name: 'Authentication',
+    name: 'Auth',
     component: () => import('./authentication/ui/AuthenticationPage.vue')
   },
   {
